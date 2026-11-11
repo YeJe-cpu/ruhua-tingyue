@@ -102,14 +102,14 @@ const Q = new URLSearchParams(location.search); if (Q.has('hud')) document.body.
 const $ = (s) => document.querySelector(s), now = () => performance.now(), clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const CLIP = {
   // 一条连续镜头：每段的首帧 = 上一段的尾帧（3D↔CG 处为叠化）
-  e0: 'clips/e0-wide-to-painter.mp4',               // CG 全景 → 画师（首尾帧）
-  c1: 'clips/v3-cg-3dcam.mp4', c2: 'clips/cg-c2-ask.mp4', c3: 'clips/cg-c3-relax.mp4',
-  bridge1: 'clips/bridge1.mp4',                     // 跟画师走到琵琶女
-  play: 'clips/cg-s6-play.mp4',
-  bridge2: 'clips/bridge2.mp4',                     // 曲终拜别 → 横移到韩熙载
-  revin: 'clips/cg-s8-in.mp4',                     // 反打倒放：从中景推近到韩熙载的脸（接得上过门 2 的尾帧）
-  rev: 'clips/cg-s8-reverse.mp4',
-  eend: 'clips/eend-to-wide.mp4',                   // 反打拉远 → CG 全景（首尾帧）
+  e0: 'clips-hd/e0-wide-to-painter.mp4',               // CG 全景 → 画师（首尾帧）
+  c1: 'clips-hd/v3-cg-3dcam.mp4', c2: 'clips-hd/cg-c2-ask.mp4', c3: 'clips-hd/cg-c3-relax.mp4',
+  bridge1: 'clips-hd/bridge1.mp4',                     // 跟画师走到琵琶女
+  play: 'clips-hd/cg-s6-play.mp4',
+  bridge2: 'clips-hd/bridge2.mp4',                     // 曲终拜别 → 横移到韩熙载
+  revin: 'clips-hd/cg-s8-in.mp4',                     // 反打倒放：从中景推近到韩熙载的脸（接得上过门 2 的尾帧）
+  rev: 'clips-hd/cg-s8-reverse.mp4',
+  eend: 'clips-hd/eend-to-wide.mp4',                   // 反打拉远 → CG 全景（首尾帧）
 };
 const VO = {};
 const S = { heat: 0, state: 'cover', beats: [], waitT: 0, lastBeat: 0 };
