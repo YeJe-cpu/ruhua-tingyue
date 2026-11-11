@@ -18,17 +18,49 @@ html,body{height:100%;background:var(--bg);color:var(--ink);font-family:"Songti 
 #hint{position:absolute;right:4%;bottom:5%;font-size:clamp(13px,1.4vw,18px);letter-spacing:.4em;color:var(--dim);opacity:0;transition:opacity .8s}
 #hint.on{opacity:1;animation:breathe 2.4s ease-in-out infinite}
 @keyframes breathe{50%{opacity:.35}}
-#heat{position:absolute;left:4%;bottom:5%;width:16vw;height:2px;background:rgba(243,230,207,.12)}
-#heat i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9772f,#f3c27a);transition:width .2s}
-#tempo{position:absolute;left:4%;bottom:calc(5% + 14px);font-size:12px;letter-spacing:.3em;color:var(--dim);opacity:0;transition:opacity .5s}
+#heat{opacity:0;position:absolute;left:4%;bottom:5%;width:max(220px,26vw);height:8px;border-radius:4px;background:rgba(243,230,207,.18);box-shadow:0 0 0 1px rgba(243,230,207,.25);transition:opacity .5s}
+#heat i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#c9772f,#f3c27a);transition:width .2s}
+#heat.full i{box-shadow:0 0 14px 2px rgba(243,194,122,.8)}
+#tempo{position:absolute;left:4%;bottom:calc(5% + 52px);font-size:12px;letter-spacing:.3em;color:var(--ink);text-shadow:0 2px 8px #000;opacity:0;transition:opacity .5s}
+#task{position:absolute;left:4%;top:16px;max-width:min(620px,70vw);padding:10px 14px;border-left:3px solid #c9772f;background:rgba(11,8,6,.55);opacity:0;transition:opacity .6s;pointer-events:none}
+#task.on{opacity:1}
+#task b{display:block;font-weight:400;font-size:clamp(15px,1.5vw,19px);letter-spacing:.15em;color:#f3c27a}
+#task span{display:block;margin-top:.35em;font-size:clamp(12px,1.15vw,15px);letter-spacing:.08em;line-height:1.6}
 .pop{position:absolute;font-size:clamp(22px,3vw,40px);color:#f3c27a;text-shadow:0 0 18px rgba(240,160,60,.7);pointer-events:none;animation:pop 1s ease-out forwards}
 @keyframes pop{from{opacity:1;transform:translateY(0) scale(.8)}to{opacity:0;transform:translateY(-60px) scale(1.2)}}
-#cover{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at center,#2a1a0f 0%,#0b0806 70%);z-index:5;transition:opacity .8s}
-#cover h1{font-size:clamp(34px,5vw,64px);letter-spacing:.4em;font-weight:400}
-#cover p{margin-top:1.2em;color:var(--dim);letter-spacing:.25em;line-height:2;text-align:center;font-size:clamp(13px,1.4vw,18px)}
-#cover button{margin-top:2.2em;background:none;border:1px solid var(--dim);color:var(--ink);font:inherit;font-size:18px;letter-spacing:.5em;padding:.7em 1.6em .7em 2.1em;cursor:pointer}
-#mute{position:fixed;right:16px;top:14px;z-index:8;background:rgba(0,0,0,.35);border:1px solid rgba(243,230,207,.35);color:var(--ink);font:14px/1 inherit;letter-spacing:.2em;padding:8px 12px;cursor:pointer;border-radius:2px}
-#mute:hover{background:rgba(0,0,0,.6)}
+#cover{position:absolute;inset:0;overflow-y:auto;background:linear-gradient(rgba(11,8,6,.82),rgba(11,8,6,.94)),url(frames/painting-crop.jpg) center/cover;z-index:5;transition:opacity .8s}
+#cover .in{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 16px 40px}
+#cover h1{font-size:clamp(34px,5vw,64px);letter-spacing:.4em;font-weight:400;margin-right:-.4em}
+#cover .kick{margin-top:.8em;color:#d9b27c;letter-spacing:.3em;font-size:clamp(13px,1.5vw,18px)}
+#cover .story{margin-top:1.8em;max-width:40em;line-height:2.1;font-size:clamp(14px,1.5vw,18px);letter-spacing:.08em}
+#cover .story .src{display:block;font-size:12px;color:var(--dim);letter-spacing:.2em}
+#cover .task{margin-top:1.4em;font-size:clamp(16px,1.9vw,22px);letter-spacing:.15em;line-height:1.9}
+#cover .task b{color:#f3c27a;font-weight:400}
+#cover ol{list-style:none;padding:0;margin:1.6em auto 0;display:grid;gap:.7em;text-align:left;font-size:clamp(13px,1.4vw,17px);letter-spacing:.08em}
+#cover ol li{border-left:2px solid #c9772f;padding:.15em 0 .15em .9em;line-height:1.6}
+#cover ol li em{font-style:normal;color:#f3c27a;margin-right:.5em}
+#cover .how{margin-top:1.4em;font-size:13px;color:var(--dim);letter-spacing:.12em;line-height:1.9}
+#cover button{margin-top:1.6em;background:none;border:1px solid var(--dim);color:var(--ink);font:inherit;font-size:18px;letter-spacing:.5em;padding:.7em 1.6em .7em 2.1em;cursor:pointer}
+#cover button:hover{background:rgba(243,230,207,.08)}
+.ctl{position:fixed;top:14px;z-index:8;background:rgba(0,0,0,.35);border:1px solid rgba(243,230,207,.35);color:var(--ink);font:14px/1 inherit;letter-spacing:.2em;padding:8px 12px;cursor:pointer;border-radius:2px}
+.ctl:hover{background:rgba(0,0,0,.6)}
+#mute{right:16px}
+#spd{right:96px}
+@media (max-height:820px){#cover .in{padding:44px 16px 24px}#cover h1{font-size:clamp(30px,4.2vw,52px)}#cover .story{margin-top:1.1em;line-height:1.85}#cover .task{margin-top:.9em;line-height:1.7}#cover ol{margin-top:1em;gap:.45em}#cover button{margin-top:1.1em;padding:.55em 1.4em .55em 1.9em}#cover .how{margin-top:.8em}}
+#heatL{position:absolute;left:4%;bottom:calc(5% + 16px);font-size:clamp(13px,1.2vw,16px);letter-spacing:.2em;color:var(--ink);text-shadow:0 2px 8px #000;opacity:0;transition:opacity .5s}
+#heatL em{font-style:normal;color:#f3c27a;margin-left:.6em}
+#big{position:absolute;left:0;right:0;top:38%;text-align:center;pointer-events:none;opacity:0;transition:opacity .5s;text-shadow:0 2px 18px #000}
+#big.on{opacity:1}
+#big b{display:block;font-weight:400;font-size:clamp(30px,5vw,64px);letter-spacing:.3em;color:#f3c27a;animation:breathe 1.6s ease-in-out infinite}
+#big span{display:block;margin-top:.8em;font-size:clamp(13px,1.5vw,18px);letter-spacing:.2em}
+#end{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:8vh 16px 5vh;text-align:center;background:linear-gradient(transparent,rgba(11,8,6,.92) 35%);opacity:0;pointer-events:none;transition:opacity 1.2s}
+#end.on{opacity:1;pointer-events:auto}
+#end h2{font-weight:400;font-size:clamp(22px,3.2vw,40px);letter-spacing:.25em}
+#end p{max-width:46em;margin:1em auto 0;line-height:2;letter-spacing:.08em;font-size:clamp(13px,1.4vw,17px)}
+#end p.mk{font-size:12px;color:var(--dim);margin-top:.8em}
+#end .btns{margin-top:1.4em;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#end .btns a{color:var(--ink);text-decoration:none;border:1px solid var(--dim);padding:.6em 1.4em;letter-spacing:.3em;font-size:15px}
+#end .btns a:hover{background:rgba(243,230,207,.08)}
 #sndhint{margin-top:1.2em;font-size:13px;color:var(--dim);letter-spacing:.3em;animation:breathe 2.4s ease-in-out infinite}
 #hud{position:absolute;top:8px;left:8px;font:12px monospace;color:#9a8;display:none;z-index:9}
 body.hud #hud{display:block}
@@ -42,16 +74,33 @@ body.hud #hud{display:block}
   <div id="sub"></div>
   <div id="hint">拍手 · 叫好 · 空格</div>
   <div id="tempo"></div>
+  <div id="heatL"></div>
+  <div id="task"><b></b><span></span></div>
   <div id="heat"><i></i></div>
+  <div id="big"><b></b><span></span></div>
   <div id="card"><div><h2 id="cardT"></h2><p id="cardP"></p></div></div>
-  <div id="cover"><div style="text-align:center">
+  <div id="end">
+    <h2>这一夜，后来成了《韩熙载夜宴图》</h2>
+    <p>你刚才演的，是画卷的第一段「听乐」：李姬弹琵琶，红衣的状元郎粲坐在你身旁，满座宾客侧耳倾听。<br>画里的韩熙载，眉头始终没有舒展。</p>
+    <p class="mk">怎么做的：人物由 Hi3D 生成 3D 模型，在 Blender 里按原画摆好站位，作为每个镜头的构图底座；画面与动作由 AI 视频生成，首尾帧相接，串成一镜到底；拍手和节拍由网页实时识别。</p>
+    <div class="btns"><a href="" id="again">再入画一次</a><a href="https://github.com/YeJe-cpu/ruhua-tingyue" target="_blank" rel="noopener">制作说明</a></div>
+  </div>
+  <div id="cover"><div class="in">
     <h1>入画 · 听乐</h1>
-    <p>你是韩熙载。今夜府中设宴。<br>宫里来了一位画师，他在看你。<br>若你闷闷不乐——拍手、叫好，装得尽兴些。</p>
+    <p class="kick">《韩熙载夜宴图》第一幕 · 一部由你来演的互动影片</p>
+    <p class="story">南唐末年，后主李煜猜忌大臣韩熙载，<br>派宫廷画师顾闳中夜入韩府，把宴会上的一切画下来，带回宫里。<br>韩熙载心知肚明。他只能夜夜笙歌，装作只爱享乐、毫无野心——<br>这样，皇帝才会放心。<span class="src">（据传世说法）</span></p>
+    <p class="task">今夜，你就是韩熙载。画师就在席间，看着你。<br><b>别让宴会冷下来。</b></p>
+    <ol>
+      <li><em>一</em>画师起疑时——拍手、叫好，热闹够了，他才放心</li>
+      <li><em>二</em>琵琶响起时——跟着打拍子，你拍多快，她弹多快</li>
+      <li><em>三</em>停手太久——画师会回过头，再看你一眼</li>
+    </ol>
     <button id="go">入 画</button>
-    <p id="sndhint">轻触任意处 · 开启琵琶声</p>
-    <p style="font-size:12px;margin-top:1.6em">允许麦克风：现场拍手、欢呼 ｜ 也可按空格 / 点屏幕 ｜ 建议戴耳机或开外放</p>
+    <p id="sndhint" style="margin-top:1em;font-size:13px;color:var(--dim);letter-spacing:.3em">轻触任意处 · 开启琵琶声</p>
+    <p class="how">点“入画”后浏览器会请求麦克风：允许后对着电脑鼓掌、欢呼；不想开麦，按空格或点屏幕也行<br>全程约 1 分半 · 请开声音 · 电脑 Chrome 体验最佳 · 右上角可调倍速</p>
   </div></div>
-  <button id="mute" title="静音 / 开声">声 · 开</button>
+  <button id="spd" class="ctl" title="过场倍速（打拍子不受影响）">倍速 自动</button>
+  <button id="mute" class="ctl" title="静音 / 开声">声 · 开</button>
   <div id="hud"></div>
 </div>
 <script>
@@ -60,14 +109,14 @@ const Q = new URLSearchParams(location.search); if (Q.has('hud')) document.body.
 const $ = (s) => document.querySelector(s), now = () => performance.now(), clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const CLIP = {
   // 一条连续镜头：每段的首帧 = 上一段的尾帧（3D↔CG 处为叠化）
-  e0: 'clips/e0-wide-to-painter.mp4',               // CG 全景 → 画师（首尾帧）
-  c1: 'clips/v3-cg-3dcam.mp4', c2: 'clips/cg-c2-ask.mp4', c3: 'clips/cg-c3-relax.mp4',
-  bridge1: 'clips/bridge1.mp4',                     // 跟画师走到琵琶女
-  play: 'clips/cg-s6-play.mp4',
-  bridge2: 'clips/bridge2.mp4',                     // 曲终拜别 → 横移到韩熙载
-  revin: 'clips/cg-s8-in.mp4',                     // 反打倒放：从中景推近到韩熙载的脸（接得上过门 2 的尾帧）
-  rev: 'clips/cg-s8-reverse.mp4',
-  eend: 'clips/eend-to-wide.mp4',                   // 反打拉远 → CG 全景（首尾帧）
+  e0: 'clips-hd/e0-wide-to-painter.mp4',               // CG 全景 → 画师（首尾帧）
+  c1: 'clips-hd/v3-cg-3dcam.mp4', c2: 'clips-hd/cg-c2-ask.mp4', c3: 'clips-hd/cg-c3-relax.mp4',
+  bridge1: 'clips-hd/bridge1.mp4',                     // 跟画师走到琵琶女
+  play: 'clips-hd/cg-s6-play.mp4',
+  bridge2: 'clips-hd/bridge2.mp4',                     // 曲终拜别 → 横移到韩熙载
+  revin: 'clips-hd/cg-s8-in.mp4',                     // 反打倒放：从中景推近到韩熙载的脸（接得上过门 2 的尾帧）
+  rev: 'clips-hd/cg-s8-reverse.mp4',
+  eend: 'clips-hd/eend-to-wide.mp4',                   // 反打拉远 → CG 全景（首尾帧）
 };
 const VO = {};
 const S = { heat: 0, state: 'cover', beats: [], waitT: 0, lastBeat: 0 };
@@ -91,7 +140,7 @@ function play(name, { onEnd, loop = false, rate = 1, until = 0.1, fade = 120 } =
   S.state = name;
   const v = VID[name];
   if (!v) { onEnd && setTimeout(onEnd, 50); return; }          // 素材缺失（如 3D 还没渲完）：直接跳过，不打断体验
-  v.muted = MUTED; v.loop = loop; v.playbackRate = rate; v.preservesPitch = true; v.currentTime = 0; v.volume = 0;
+  v.muted = MUTED; v.loop = loop; v.playbackRate = name === 'play' ? rate : rate * spd(); v.preservesPitch = true; v.currentTime = 0; v.volume = 0;
   v.play().catch(() => {}); fadeVol(v, 1, Math.max(fade, 250));
   const prev = cur; v.style.transition = prev.style.transition = `opacity ${fade}ms linear`; v.classList.add('on'); prev.classList.remove('on'); fadeVol(prev, 0, Math.max(fade, 250)); setTimeout(() => { if (prev !== cur) prev.pause(); }, fade + 300);
   prev.onended = null; prev.ontimeupdate = null; cur = v;
@@ -102,6 +151,18 @@ function fadeVol(el, to, ms) { const from = el.volume, t0 = now(); (function f()
 // 夜宴底声：奏乐那段的琵琶声低音量循环（c1 画面里琵琶女本就在弹），奏乐段与反打段停掉
 const BED = new Audio('clips/bed-pipa.m4a'); BED.loop = true; BED.volume = 0;
 let MUTED = false, started = false;
+/* 倍速：只作用于过场片段与字幕计时；奏乐打拍子不受影响。
+   默认「自动」：开场到画师走近 1.25×，画师发问到叫好、奏乐前后 1×，「下官都记下了」之后的反打出画 1.5×；手动选了就全程按手动 */
+const SPDS = [0, 1, 1.25, 1.5, 2];   // 0 = 自动
+let SPD = 0, SEG = 1.25; try { const k = +localStorage.getItem('ruhua-spd2'); if (SPDS.includes(k)) SPD = k; } catch (e) {}
+const spd = () => SPD || SEG;
+const T = (ms, fn) => setTimeout(fn, ms / spd());
+function seg(r) { SEG = r; applySpd(); }
+function applySpd() { $('#spd').textContent = SPD ? `倍速 ${SPD}×` : `倍速 自动`; if (S.state !== 'play' && cur && !cur.paused) cur.playbackRate = spd(); }
+$('#spd').addEventListener('pointerdown', (e) => { e.stopPropagation(); SPD = SPDS[(SPDS.indexOf(SPD) + 1) % SPDS.length]; try { localStorage.setItem('ruhua-spd2', SPD); } catch (er) {} applySpd(); });
+function big(t, s, ms) { $('#big b').textContent = t; $('#big span').textContent = s || ''; $('#big').classList.add('on'); clearTimeout(big.t); if (ms) big.t = setTimeout(() => $('#big').classList.remove('on'), ms); }
+let HL = ''; function heatL(t) { HL = t; $('#heatL').textContent = t; $('#heatL').style.opacity = t ? 1 : 0; $('#heat').style.opacity = t ? 1 : 0; }
+function task(t, s) { if (!t) { $('#task').classList.remove('on'); return; } $('#task b').textContent = t; $('#task span').textContent = s || ''; $('#task').classList.add('on'); }
 function applyMute() { document.querySelectorAll('video,audio').forEach((m) => (m.muted = MUTED)); BED.muted = MUTED; $('#mute').textContent = MUTED ? '声 · 关' : '声 · 开'; }
 $('#mute').addEventListener('pointerdown', (e) => { e.stopPropagation(); MUTED = !MUTED; applyMute(); if (!MUTED) startBed(); });
 function startBed() { if (started) return; started = true; bed(true, .4); const h = $('#sndhint'); if (h) h.textContent = '琵琶声已开 · 点"入画"开始'; }
@@ -120,7 +181,7 @@ function onBeat(x, y) {
   $('#stage').appendChild(p); setTimeout(() => p.remove(), 1000);
 }
 addEventListener('keydown', (e) => { if (e.code === 'Space') { e.preventDefault(); onBeat(); } if (e.key === 'h') document.body.classList.toggle('hud'); });
-$('#stage').addEventListener('pointerdown', (e) => { if (e.target.id !== 'go') onBeat(e.clientX, e.clientY); });
+$('#stage').addEventListener('pointerdown', (e) => { if (e.target.id !== 'go' && !e.target.closest('#end,#cover,.ctl')) onBeat(e.clientX, e.clientY); });
 
 let mic = null, AC = null;
 // 檀板声：短促噪声 + 带通，像两片木板一合
@@ -157,29 +218,35 @@ function micStep(dt) {
 async function start() {   // 方案 A：原画 → CG 全景（构图由 Hi3D 3D 场景定）→ 镜头推进、画师走近
   const pi = $('#paint'), wi = $('#wide'); pi.style.transition = 'opacity 1.2s'; pi.style.opacity = 1;
   say('第一幕 · 听乐', 3400, '南唐 · 韩熙载府');
-  setTimeout(() => { wi.style.opacity = 1; }, 2200);                                   // 原画叠化成 CG 全景
-  setTimeout(() => { pi.style.opacity = 0; bed(true); play('e0', { fade: 10, onEnd: s5 }); setTimeout(() => (wi.style.opacity = 0), 150); }, 4700);   // 全景静帧停 1.5 秒后开始动
+  T(4700, () => task('今夜，你是韩熙载', '宫里来的画师正朝你走来。别让他起疑——待会儿要拍手、叫好，让宴会热闹起来。'));
+  T(2200, () => { wi.style.opacity = 1; });                                   // 原画叠化成 CG 全景
+  T(4700, () => { pi.style.opacity = 0; bed(true); play('e0', { fade: 10, onEnd: s5 }); setTimeout(() => (wi.style.opacity = 0), 150); });   // 全景静帧停 1.5 秒后开始动
 }
 function s5() {
   bed(true); S.heat = 0; S.state = 'c1'; play('c1', { onEnd: () => (S.heat >= TH ? toC3() : toC2()) });
-  setTimeout(() => say('宫里来的待诏……顾闳中。', 3000, '郎粲 低声'), 1200);
+  T(1200, () => say('宫里来的待诏……顾闳中。他在看你。', 3000, '郎粲 低声'));
+  $('#hint').textContent = '拍手 · 叫好 · 空格'; $('#hint').classList.add('on'); heatL('宴会热闹度'); task('让宴会热闹起来，别让画师起疑', (mic ? '对着电脑拍手、叫好，或按空格 / 点屏幕' : '连按空格，或连点屏幕') + ' —— 把左下角的「宴会热闹度」填满。');   /* 一开始就可以叫好：够热闹，画师就不会起疑 */
 }
 function toC2() {
-  play('c2', { onEnd: () => { S.state = 'wait'; S.waitT = now(); $('#hint').classList.add('on'); cur.pause(); } });
-  setTimeout(() => say('大人今夜……怎么闷闷不乐？', 2600, '顾闳中'), 150);
-  setTimeout(() => { say('大人，该叫个好了。', 3000, '郎粲 凑近'); $('#hint').classList.add('on'); }, 3600);   // 只出字幕：合成配音和视频自带人声会叠在一起
+  seg(1);
+  play('c2', { onEnd: () => { S.state = 'wait'; S.waitT = now(); $('#hint').classList.add('on'); cur.pause(); big('拍手！叫好！', '让满座热闹起来，画师才会放心 —— 对着麦克风鼓掌欢呼，或连按空格 / 点屏幕'); } });
+  T(150, () => say('大人今夜……怎么闷闷不乐？', 2600, '顾闳中'));
+  T(3600, () => { say('大人，该叫个好了。', 3000, '郎粲 凑近'); $('#hint').classList.add('on'); });   // 只出字幕：合成配音和视频自带人声会叠在一起
 }
 function toC3() {
-  $('#hint').classList.remove('on');
+  seg(1);
+  $('#hint').classList.remove('on'); $('#big').classList.remove('on'); heatL('');
+  task('画师放心了', '满座哄笑。接下来李姬要弹琵琶——准备好，跟着她打拍子。');
   play('c3', { until: 1.6, onEnd: () => play('bridge1', { onEnd: s6 }) });
-  setTimeout(() => say('满座哄笑，顾待诏也笑了。', 2800), 900);
+  T(900, () => say('满座哄笑，顾待诏也笑了。', 2800));
 }
 let s6T0 = 0, turned = false;
 function s6() {
   S.beats = []; S.total = 0; S.steady = 0; S.lastBeat = now(); turned = false; s6T0 = now(); bed(false);
   play('play', { loop: true });
-  say('跟着琵琶，打拍子', 3000, '奏乐');
-  $('#hint').textContent = '跟着琴声 · 拍手打拍子'; $('#hint').classList.add('on'); $('#tempo').style.opacity = 1;
+  big('跟着琵琶打拍子', mic ? '拍手、按空格、点屏幕都行' : '按空格或点屏幕', 4000);
+  task('跟着琵琶打拍子', '一拍一下，拍快她就弹快。拍满「一曲进度」就曲终。');
+  $('#hint').textContent = mic ? '跟着琴声 · 拍手打拍子' : '跟着琴声 · 空格打拍子'; $('#hint').classList.add('on'); $('#tempo').style.opacity = 1; heatL('一曲进度');
 }
 function s6Step() {
   const t = now(), n = S.beats.length;
@@ -190,20 +257,23 @@ function s6Step() {
   const lab = !bpm || idle0 >= 1500 ? '等你起拍' : bpm < 95 ? '慢板' : bpm < 135 ? '中板' : '急板 · 轮指';
   $('#tempo').style.fontSize = bpm && idle0 < 1500 ? '22px' : '12px';
   $('#tempo').textContent = bpm && idle0 < 1500 ? `${lab}　琴速 ×${cur.playbackRate.toFixed(1)}` : lab;
+  if (!S.total && t - s6T0 > 6000 && !s6Step.nudged) { s6Step.nudged = true; big('打出第一拍', mic ? '拍一下手，或按一下空格' : '按一下空格', 0); }
+  if (S.total && s6Step.nudged && $('#big').classList.contains('on') && $('#big b').textContent === '打出第一拍') $('#big').classList.remove('on');
   const idle = t - S.lastBeat;
   if (idle > 3000 && !turned && t - s6T0 > 4000) { turned = true; say('顾闳中回过头，又看了你一眼。', 2600, '你一停手'); $('#vig').style.background = 'rgba(0,0,0,.25)'; }
   if (idle < 1000 && turned) { turned = false; $('#vig').style.background = ''; }
-  S.steady = (S.steady || 0) + (idle < 1300 ? 16.7 : 0);                 // 跟拍的累计时长
+  S.steady = (S.steady || 0) + (S.total && idle < 1300 ? 16.7 : 0);   /* 起拍之后才计进度 */                 // 跟拍的累计时长
   $('#heat i').style.width = clamp(S.steady / 12000) * 100 + '%';
   if (S.steady >= 12000 || t - s6T0 > 35000) { endS6(); }               // 跟拍满 12 秒 = 曲终；35 秒兜底
 }
 function endS6() {
-  S.state = 'toRev'; $('#hint').classList.remove('on'); $('#tempo').style.opacity = 0; $('#vig').style.background = '';
+  task('一曲终了', '画师起身作揖。看看他会怎么记下你——'); T(9000, () => task(''));
+  S.state = 'toRev'; $('#hint').classList.remove('on'); $('#big').classList.remove('on'); $('#tempo').style.opacity = 0; $('#vig').style.background = ''; heatL(''); $('#heat').style.opacity = 0;
   bed(false);
-  const fin = () => card('入画 · 听乐', '这一夜，后来成了《韩熙载夜宴图》<br><span style="font-size:.7em">《韩熙载夜宴图》· 听乐 ｜ Hi3D × AI 视频 × 互动</span>', 600000);
-  const toPaint = () => { const pi = $('#paint'); pi.style.transform = ''; pi.style.transition = 'opacity 1.5s'; pi.style.opacity = 1; fadeVol(cur, 0, 1500); setTimeout(fin, 4000); };   /* CG 全景 → 原画：纯叠化，与预览一致 */
-  play('bridge2', { onEnd: () => play('revin', { fade: 300, onEnd: () => play('rev', { onEnd: () => play('eend', { until: 0.3, onEnd: toPaint }) }) }) });
-  setTimeout(() => say('今夜得见韩公雅集，下官……都记下了。', 3600, '顾闳中 作揖'), 2600);
+  const fin = () => { task(''); S.state = 'end'; $('#end').classList.add('on'); };
+  const toPaint = () => { const pi = $('#paint'); pi.style.transform = ''; pi.style.transition = 'opacity 1.5s'; pi.style.opacity = 1; fadeVol(cur, 0, 1500); T(2500, fin); };   /* CG 全景 → 原画：纯叠化，与预览一致 */
+  play('bridge2', { onEnd: () => { seg(1.5); play('revin', { fade: 300, onEnd: () => play('rev', { onEnd: () => play('eend', { until: 0.3, onEnd: toPaint }) }) }); T(600, () => say('镜头第一次转过来——<br>从画师的眼里，你看见了自己。', 4200)); } });
+  T(2600, () => say('今夜得见韩公雅集，下官……都记下了。', 3600, '顾闳中 作揖'));
 }
 
 let last = now();
@@ -212,6 +282,7 @@ function tick() {
   micStep(dt);
   S.heat = Math.max(0, S.heat - dt * (S.state === 'wait' ? 0.08 : 0.10));   // 不叫好掉得快
   if (S.state !== 'play') $('#heat i').style.width = (['c1', 'c2', 'wait'].includes(S.state) ? clamp(S.heat / TH) * 100 : 0) + '%';
+  if (HL) { const pct = Math.round(parseFloat($('#heat i').style.width) || 0); $('#heatL').innerHTML = `${HL}<em>${pct}%</em>`; $('#heat').classList.toggle('full', pct >= 99); }
   if (S.state === 'wait' && (S.heat >= TH || t - S.waitT > 20000)) toC3();
   if (S.state === 'play') s6Step();
   $('#hud').textContent = `state=${S.state} heat=${S.heat.toFixed(2)} beats=${S.beats.length} rate=${cur.playbackRate.toFixed(2)} mic=${!!mic}`;
@@ -225,5 +296,7 @@ $('#go').onclick = async () => {
   ({ end: endS6, s6: s6, s5: s5 }[Q.get('from')] || start)();   // 调试：?from=end/s6/s5 直接从某段开始
 };
 window.__dbg = { VID, S, onBeat, toC3, s6, endS6 };
+$('#again').addEventListener('click', (e) => { e.preventDefault(); location.reload(); });
+applySpd();
 tick();
 </script></body></html>
